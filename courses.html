@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our All Course</title></title>
+  <title>Our All Course</title>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2&display=swap" rel="stylesheet">
   <style>
     body {
@@ -33,10 +33,10 @@
       margin-bottom: 10px;
     }
 
-    .contact-button {
+    .contact-button,
+    .home-button {
       position: absolute;
       top: 30px;
-      right: 20px;
       background-color: goldenrod;
       color: black;
       padding: 10px 20px;
@@ -46,9 +46,23 @@
       transition: background 0.3s ease;
     }
 
-    .contact-button:hover {
+    .contact-button:hover,
+    .home-button:hover {
       background-color: lightskyblue;
       color: black;
+    }
+
+    .home-button {
+      top: 30px;
+      left: 20px;
+      border-radius: 50%;
+      padding: 10px;
+      width: 40px;
+      height: 40px;
+      background-image: url('Home.png');
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     }
 
     .course-container {
@@ -106,13 +120,47 @@
       border-radius: 30px;
       display: inline-block;
       font-weight: bold;
-      transition: all 0.3s ease-in-out;
       box-shadow: 0 5px 15px rgba(0,255,255,0.4);
+      animation: rotatePulse 2.5s infinite ease-in-out;
+      transition: transform 0.3s ease-in-out;
     }
 
     .play-button:hover {
       background: lightskyblue;
       box-shadow: 0 8px 20px rgba(0,255,255,0.6);
+      transform: scale(1.1);
+    }
+
+    .buy-button {
+      margin-top: 15px;
+      background: green;
+      color: #000;
+      padding: 10px 22px;
+      text-decoration: none;
+      border-radius: 20px;
+      display: inline-block;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+      animation: rotatePulse 2.5s infinite ease-in-out;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .buy-button:hover {
+      background: black;
+      color: white;
+      transform: scale(1.1);
+    }
+
+    @keyframes rotatePulse {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+      50% {
+        transform: rotate(1deg) scale(1.03);
+      }
+      100% {
+        transform: rotate(0deg) scale(1);
+      }
     }
 
     footer {
@@ -149,6 +197,14 @@
         padding: 8px 10px;
         background: skyblue;
       }
+
+      .home-button {
+        top: 10px;
+        left: 10px;
+        padding: 8px;
+        width: 35px;
+        height: 35px;
+      }
     }
   </style>
 </head>
@@ -156,7 +212,7 @@
 
   <header>
     <a href="details.html" class="contact-button">contact</a>
-    <h1>our all couse</h1></h1>
+    <h1>our all course</h1>
     <p>CapCut ও Alight Motion এর জন্য প্রিমিয়াম কোর্স</p>
   </header>
 
@@ -167,13 +223,16 @@
       <p>শিখুন সব ফিচার, ট্রানজিশন, এবং প্রো টিপস।</p>
       <p class="price">$ Required Password</p>
       <a href="video.html" class="play-button">Play course</a>
+      <a href="payment.html" class="buy-button">Buy Now</a>
     </div>
+
     <div class="course-card">
       <img src="abdulmojid.jpg" alt="Alight Motion প্রো">
       <h2>Alight Motion Course 1</h2>
       <p>মোশন ডিজাইন, ভেক্টর ও ট্রানজিশন সহ।</p>
       <p class="price">$ Required Password</p>
       <a href="alight-course1.html" class="play-button">Play course</a>
+      <a href="payment.html" class="buy-button">Buy Now</a>
     </div>
   </div>
 

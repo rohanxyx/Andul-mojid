@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment via WhatsApp</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Baloo Da 2', cursive;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 40px 20px 20px;
+      background: rgba(0,0,0,0.5);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    header h1 {
+      font-size: 30px;
+      margin-bottom: 10px;
+      color: #ffc107;
+    }
+
+    .payment-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .payment-box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 25px 30px;
+      margin: 20px 0;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,255,255,0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .payment-box img {
+      width: 100px;
+      margin-bottom: 10px;
+    }
+
+    .payment-box h2 {
+      margin: 10px 0;
+      font-size: 22px;
+      color: #ffcc00;
+    }
+
+    .number {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffffff;
+      background: #00000066;
+      padding: 10px;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    .copy-btn {
+      margin-top: 10px;
+      background: goldenrod;
+      color: black;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .copy-btn:hover {
+      background: lightskyblue;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 8px;
+      border-radius: 6px;
+      border: none;
+      font-family: 'Baloo Da 2', cursive;
+    }
+
+    .whatsapp-btn {
+      margin-top: 12px;
+      background: #25D366;
+      color: black;
+      padding: 10px 22px;
+      border-radius: 30px;
+      text-decoration: none;
+      display: inline-block;
+      font-weight: bold;
+      box-shadow: 0 5px 15px rgba(0,255,0,0.3);
+      transition: background 0.3s ease-in-out;
+    }
+
+    .whatsapp-btn:hover {
+      background: #128C7E;
+      color: white;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #ccc;
+      background: rgba(0,0,0,0.7);
+      margin-top: 40px;
+    }
+
+    @media (max-width: 500px) {
+      .payment-box {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>পেমেন্ট করুন</h1>
+    <p>আপনি bKash বা Nagad দিয়ে WhatsApp এর মাধ্যমে পেমেন্ট করতে পারবেন।</p>
+  </header>
+
+  <div class="payment-container">
+    <!-- bKash -->
+    <div class="payment-box">
+      <img src="https://i.ibb.co.com/d4hXSDzF/IMG-0529.png" alt="bKash Logo">
+      <h2>bKash Personal</h2>
+      <div class="number" id="bkash">017XXXXXXXX</div>
+      <button class="copy-btn" onclick="copyToClipboard('bkash')">Copy Number</button>
+      <input type="text" id="bkashTrx" placeholder="Transaction ID">
+      <input type="number" id="bkashAmount" placeholder="Amount (৳)">
+      <button class="whatsapp-btn" onclick="sendWhatsApp('bkashTrx', 'bkashAmount', 'bKash')">Confirm in WhatsApp</button>
+    </div>
+
+    <!-- Nagad -->
+    <div class="payment-box">
+      <img src="https://download.logo.wine/logo/Nagad/Nagad-Logo.wine.png" alt="Nagad Logo">
+      <h2>Nagad Personal</h2>
+      <div class="number" id="nagad">017XXXXXXXX</div>
+      <button class="copy-btn" onclick="copyToClipboard('nagad')">Copy Number</button>
+      <input type="text" id="nagadTrx" placeholder="Transaction ID">
+      <input type="number" id="nagadAmount" placeholder="Amount (৳)">
+      <button class="whatsapp-btn" onclick="sendWhatsApp('nagadTrx', 'nagadAmount', 'Nagad')">Confirm in WhatsApp</button>
+    </div>
+  </div>
+
+  <footer>
+    &copy; ২০২৫ AM Course | Powered by Abdul Mojid
+  </footer>
+
+  <script>
+    function copyToClipboard(id) {
+      var text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(function () {
+        alert("নম্বর কপি হয়েছে: " + text);
+      });
+    }
+
+    function sendWhatsApp(trxIdInputId, amountInputId, method) {
+      const trx = document.getElementById(trxIdInputId).value.trim();
+      const amount = document.getElementById(amountInputId).value.trim();
+      
+      if (!trx || !amount) {
+        alert("দয়া করে Transaction ID এবং Amount লিখুন।");
+        return;
+      }
+
+      const phone = "8801742888104"; // WhatsApp নম্বর
+      const message = `আমি ${method} দিয়ে পেমেন্ট করেছি। Transaction ID: ${trx}, Amount: ${amount}৳`;
+
+      // WhatsApp URL তৈরি করে এবং তা ওপেন করা
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    }
+  </script>
+
+</body>
+</html>
