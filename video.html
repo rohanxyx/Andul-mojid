@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Video</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1d2b64, #f8cdda, #1fa2ff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: white;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .video-container {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .video-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #fff;
+      text-shadow: 1px 1px 4px #000;
+    }
+
+    .password-input {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    input[type="password"] {
+      padding: 12px;
+      width: 90%;
+      max-width: 300px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      margin-bottom: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #00c9a7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 90%;
+      max-width: 300px;
+    }
+
+    button:hover {
+      background-color: #007e6a;
+    }
+
+    video {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="video-container" id="video1">
+      <div class="video-title">Alight Motion Tutorial 1</div>
+      <div class="password-input" id="input-area">
+        <input type="password" id="password1" placeholder="Enter Password">
+        <button onclick="checkPassword()">Play Video</button>
+      </div>
+      <div id="video1-container"></div>
+    </div>
+  </div>
+
+  <script>
+    const correctPassword = 'video123'; // Change to your password
+    const videoUrl = 'https://www.w3schools.com/html/mov_bbb.mp4'; // Change to your video URL
+
+    function checkPassword() {
+      const enteredPassword = document.getElementById('password1').value;
+      if (enteredPassword === correctPassword) {
+        document.getElementById('input-area').style.display = 'none';
+        document.getElementById('video1-container').innerHTML = `
+          <video controls controlsList="nodownload" oncontextmenu="return false">
+            <source src="${videoUrl}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        `;
+      } else {
+        alert('Incorrect password. Please try again.');
+      }
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our All Course</title></title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Baloo Da 2', cursive;
+      margin: 0;
+      background: linear-gradient(135deg, #0f2027, #203a43, black);
+      color: #fff;
+    }
+
+    header {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 32px;
+      color: darkgray;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 18px;
+      color: whitesmoke;
+      margin-bottom: 10px;
+    }
+
+    .contact-button {
+      position: absolute;
+      top: 30px;
+      right: 20px;
+      background-color: goldenrod;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .contact-button:hover {
+      background-color: lightskyblue;
+      color: black;
+    }
+
+    .course-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 50px 20px;
+      gap: 30px;
+    }
+
+    .course-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 20px;
+      width: 280px;
+      box-shadow: 0 8px 20px rgba(0,255,255,0.1);
+      backdrop-filter: blur(10px);
+      animation: fadeIn 1s ease-in-out;
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+
+    .course-card:hover {
+      transform: scale(1.03);
+    }
+
+    .course-card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .course-card h2 {
+      color: ghostwhite;
+      margin-bottom: 10px;
+    }
+
+    .course-card p {
+      color: #ddd;
+    }
+
+    .price {
+      color: black;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .play-button {
+      margin-top: 15px;
+      background: goldenrod;
+      color: #000;
+      padding: 10px 22px;
+      text-decoration: none;
+      border-radius: 30px;
+      display: inline-block;
+      font-weight: bold;
+      transition: all 0.3s ease-in-out;
+      box-shadow: 0 5px 15px rgba(0,255,255,0.4);
+    }
+
+    .play-button:hover {
+      background: lightskyblue;
+      box-shadow: 0 8px 20px rgba(0,255,255,0.6);
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: #ccc;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      margin-top: 60px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 24px;
+      }
+      .course-card {
+        width: 90%;
+      }
+
+      .contact-button {
+        top: 10px;
+        right: 10px;
+        padding: 8px 10px;
+        background: skyblue;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="contact.html" class="contact-button">contact</a>
+    <h1>our all couse</h1></h1>
+    <p>CapCut ও Alight Motion এর জন্য প্রিমিয়াম কোর্স</p>
+  </header>
+
+  <div class="course-container">
+    <div class="course-card">
+      <img src="capcut1.png" alt="CapCut মাস্টারি">
+      <h2>CapCut Course 1</h2>
+      <p>শিখুন সব ফিচার, ট্রানজিশন, এবং প্রো টিপস।</p>
+      <p class="price">$ Required Password</p>
+      <a href="video.html" class="play-button">Play course</a>
+    </div>
+    <div class="course-card">
+      <img src="abdulmojid.jpg" alt="Alight Motion প্রো">
+      <h2>Alight Motion Course 1</h2>
+      <p>মোশন ডিজাইন, ভেক্টর ও ট্রানজিশন সহ।</p>
+      <p class="price">$ Required Password</p>
+      <a href="alight-course1.html" class="play-button">Play course</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>Powered by abdul mojid</p>
+    <p>© ২০২৫ AM course</p>
+  </footer>
+
+</body>
+</html>
