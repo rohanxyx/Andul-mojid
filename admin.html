@@ -42,7 +42,7 @@
       margin-top: 10px;
     }
 
-    /* প্রথম বাটন (পাসওয়ার্ড দেওয়ার আগে দেখা যাবে) */
+    /* প্রথম বাটন (পাসওয়ার্ড দেওয়ার আগে দেখা যাবে) */
     .first-button {
       padding: 10px 20px;
       background: goldenrod;
@@ -55,7 +55,7 @@
       max-width: 250px;
     }
 
-    /* দ্বিতীয় বাটন (পাসওয়ার্ড দেওয়ার পর দেখাবে) */
+    /* দ্বিতীয় বাটন (পাসওয়ার্ড দেওয়ার পর দেখাবে) */
     .second-button {
       display: none; /* প্রথমে হিডেন থাকবে */
       padding: 10px 20px;
@@ -73,11 +73,11 @@
 <body>
 
   <h2>শুধু অ্যাডমিনদের জন্য</h2>
-  <p>পাসওয়ার্ড দিন:</p>
+  <p>পাসওয়ার্ড দিন:</p>
   <input type="password" id="passwordInput" placeholder="Enter password">
   <br>
   <button class="first-button" onclick="checkPassword()">Login</button> <!-- প্রথম বাটন -->
-  <button class="second-button" onclick="goToAdminDashboard()">Go to Admin Panel</button> <!-- দ্বিতীয় বাটন -->
+  <button class="second-button" onclick="goToAdminDashboard()">Go to Admin Panel</button> <!-- দ্বিতীয় বাটন -->
   <p id="error"></p>
 
   <div id="adminContent">
@@ -91,17 +91,17 @@
       const adminContent = document.getElementById("adminContent");
       const error = document.getElementById("error");
 
-      // পাসওয়ার্ড সঠিক হলে
+      // পাসওয়ার্ড সঠিক হলে
       if (password === "admin123") {
         // অ্যাডমিন কনটেন্ট দেখাবে
         adminContent.style.display = "block";
-        // প্রথম বাটন হিডেন করবে এবং দ্বিতীয় বাটন দেখাবে
+        // প্রথম বাটন হিডেন করবে এবং দ্বিতীয় বাটন দেখাবে
         document.querySelector(".first-button").style.display = "none";
         document.querySelector(".second-button").style.display = "inline-block";
       } else {
-        // ভুল পাসওয়ার্ড হলে
+        // ভুল পাসওয়ার্ড হলে
         adminContent.style.display = "none";
-        error.innerText = "ভুল পাসওয়ার্ড!";
+        error.innerText = "ভুল পাসওয়ার্ড!";
       }
     }
 

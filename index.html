@@ -34,7 +34,7 @@
       padding: 30px 20px;
       text-align: center;
       border-bottom: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 4px 20px(0, 255, 255, 0.2);
+      box-shadow: 0 0px 0px rgba(0, 255, 255, 0.2);
     }
 
     header h1 {
@@ -69,8 +69,8 @@
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      border: 2px solid cornsilk;
-      box-shadow: 0 0 0px white;
+      border: 2px solid whitesmoke;
+      box-shadow: 10 0 0px white;
       margin-bottom: 8px;
       transition: transform 0.3s ease;
     }
@@ -93,9 +93,10 @@
       width: 160px;
       height: 160px;
       border-radius: 50%;
-      border: 4px solid gray;
-      box-shadow: 0 0 25px floralwhite;
+      border: 4px solid hotpink;
+      box-shadow: 0 0 12px pink;
       transition: transform 0.3s ease;
+      cursor: pointer;
     }
 
     .admin-photo img:hover {
@@ -153,6 +154,31 @@
       nav a span { font-size: 12px; }
       .intro { margin: 30px 15px; }
     }
+
+    /* Notification Style */
+    #notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: linear-gradient(135deg, #00ff88, #0077ff);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.5s ease, opacity 0.5s ease, visibility 0.5s ease;
+      z-index: 9999;
+    }
+
+    #notification.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
   </style>
 </head>
 <body>
@@ -163,22 +189,22 @@
   </header>
 
   <nav>
-    <a href="index.html">
+    <a href="index.html" id="homeBtn">
       <img src="home.png" alt="হোম" />
       <span>Home</span>
     </a>
-    <a href="courses.html">
+    <a href="courses.html" id="courseBtn">
       <img src="course.png" alt="কোর্সসমূহ" />
       <span>কোর্সসমূহ</span>
     </a>
-    <a href="details.html">
+    <a href="#" id="contactBtn">
       <img src="chat.png" alt="যোগাযোগ" />
       <span>যোগাযোগ</span>
     </a>
   </nav>
 
   <section class="admin-photo">
-    <img src="abdulmojid.jpg" alt="Abdul Mojid">
+    <img src="abdulmojid.jpg" alt="Abdul Mojid" id="adminImg">
     <p>•𝓐𝓫𝓭𝓾𝓵 𝓜𝓸𝓳𝓲𝓭•</p>
   </section>
 
@@ -190,13 +216,22 @@
     </p>
   </section>
 
-  <!-- Clock at Bottom -->
   <div class="clock-bottom" id="clock"></div>
 
   <footer>
     <p>© ২০২৫ AM Video Course | Powered by Abdul Mojid | Designed by Imam Hossen Rohan</p>
   </footer>
 
+  <!-- Notification -->
+  <div id="notification">Assalamualaikum</div>
+
+  <!-- অডিও -->
+  <audio id="homeSound" src="home.mp3"></audio>
+  <audio id="courseSound" src="noti2.mp3"></audio>
+  <audio id="contactSound" src="noti1.mp3"></audio>
+  <audio id="adminSound" src="noti3.mp3"></audio>
+
+  <!-- স্ক্রিপ্ট -->
   <script>
     function updateClock() {
       const now = new Date();
@@ -211,6 +246,39 @@
 
     setInterval(updateClock, 1000);
     updateClock();
+
+    function delayedRedirect(audio, url) {
+      audio.play();
+      setTimeout(() => {
+        window.location.href = url;
+      }, 500);
+    }
+
+    document.getElementById("homeBtn").addEventListener("click", function(e) {
+      e.preventDefault();
+      delayedRedirect(homeSound, "index.html");
+    });
+
+    document.getElementById("courseBtn").addEventListener("click", function(e) {
+      e.preventDefault();
+      delayedRedirect(courseSound, "courses.html");
+    });
+
+    document.getElementById("contactBtn").addEventListener("click", function(e) {
+      e.preventDefault();
+      delayedRedirect(contactSound, "details.html");
+    });
+
+    const adminImg = document.getElementById("adminImg");
+    const adminSound = document.getElementById("adminSound");
+    adminImg.addEventListener("click", () => {
+      adminSound.play();
+      const notification = document.getElementById("notification");
+      notification.classList.add("show");
+      setTimeout(() => {
+        notification.classList.remove("show");
+      }, 2000);
+    });
   </script>
 
 </body>

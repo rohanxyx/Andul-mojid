@@ -128,12 +128,12 @@
       color: #000;
       padding: 10px 22px;
       text-decoration: none;
-      border-radius: 30px;
+      border-radius: 10px;
       display: inline-block;
       font-weight: bold;
-      box-shadow: 0 5px 15px rgba(0,255,255,0.4);
-      animation: rotatePulse 2.5s infinite ease-in-out;
-      transition: transform 0.3s ease-in-out;
+      box-shadow: 0 5px 10px black(0,255,255,0.4);
+      animation: rotatePulse 0s infinite ease-in-out;
+      transition: transform 0.0s ease-in-out;
     }
 
     .play-button:hover {
@@ -162,18 +162,6 @@
       transform: scale(1.1);
     }
 
-    @keyframes rotatePulse {
-      0% {
-        transform: rotate(0deg) scale(1);
-      }
-      50% {
-        transform: rotate(1deg) scale(1.03);
-      }
-      100% {
-        transform: rotate(0deg) scale(1);
-      }
-    }
-
     footer {
       background: rgba(0, 0, 0, 0.8);
       color: #ccc;
@@ -191,6 +179,18 @@
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    @keyframes rotatePulse {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+      50% {
+        transform: rotate(1deg) scale(1.03);
+      }
+      100% {
+        transform: rotate(0deg) scale(1);
       }
     }
 
@@ -253,6 +253,21 @@
     <p>Powered by abdul mojid</p>
     <p>© ২০২৫ AM course</p>
   </footer>
+
+  <!-- সাউন্ড ফাইল -->
+  <audio id="courseSound" src="noti2.mp3"></audio>
+
+  <script>
+    // সাউন্ড প্লে করার জন্য কোড
+    const courseCards = document.querySelectorAll(".course-card");
+    const courseSound = document.getElementById("courseSound");
+
+    courseCards.forEach(card => {
+      card.addEventListener("click", () => {
+        courseSound.play();
+      });
+    });
+  </script>
 
 </body>
 </html>
