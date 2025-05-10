@@ -19,6 +19,8 @@
       background: linear-gradient(45deg, #ff0055, black, #a020f0);
       background-size: 600% 600%;
       animation: gradientBG 10s ease infinite;
+      display: flex;
+      flex-direction: column;
     }
 
     @keyframes gradientBG {
@@ -130,8 +132,14 @@
       color: #ddd;
     }
 
+    .clock-bottom {
+      text-align: center;
+      font-size: 20px;
+      color: lightyellow;
+      margin: 20px 0 10px;
+    }
+
     footer {
-      margin-top: 60px;
       background: rgba(0, 0, 0, 0.7);
       text-align: center;
       color: #ccc;
@@ -154,11 +162,10 @@
     <p>CapCut ও Alight Motion এর প্রিমিয়াম কোর্স এক জায়গায়</p>
   </header>
 
-  <!-- Navigation buttons with circular images -->
   <nav>
     <a href="index.html">
       <img src="home.png" alt="হোম" />
-      <span>হোম</span>
+      <span>Home</span>
     </a>
     <a href="courses.html">
       <img src="course.png" alt="কোর্সসমূহ" />
@@ -170,7 +177,6 @@
     </a>
   </nav>
 
-  <!-- Admin Photo Above Course Details -->
   <section class="admin-photo">
     <img src="abdulmojid.jpg" alt="Abdul Mojid">
     <p>• Abdul Mojid •</p>
@@ -179,14 +185,33 @@
   <section class="intro">
     <h2>কেন আমাদের কোর্স করবেন?</h2>
     <p>
-      CapCut ও Alight Motion নিয়ে আমাদের নতুন প্রফেশনাল কোর্স আপনাকে শেখাবে মোশন ডিজাইন, ট্রানজিশন, ভেক্টর এনিমেশন, টেক্সট এফেক্টসহ আরও অনেক কিছু।
-      সম্পূর্ণ বাংলা ভাষায় ব্যাখ্যা করা সহজ ভিডিওর মাধ্যমে আপনি হয়ে উঠবেন একজন দক্ষ এডিটর।
+      CapCut ও Alight Motion নিয়ে আমাদের নতুন প্রফেশনাল কোর্স আপনাকে শেখাবে মোশন ডিজাইন, ট্রানজিশন, ভেক্টর এনিমেশন, টেক্সট এফেক্টসহ আরও অনেক কিছু।
+      সম্পূর্ণ বাংলা ভাষায় ব্যাখ্যা করা সহজ ভিডিওর মাধ্যমে আপনি হয়ে উঠবেন একজন দক্ষ এডিটর।
     </p>
   </section>
+
+  <!-- Clock at Bottom -->
+  <div class="clock-bottom" id="clock"></div>
 
   <footer>
     <p>© ২০২৫ AM Video Course | Powered by Abdul Mojid | Designed by Imam Hossen Rohan</p>
   </footer>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString('bn-BD', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true
+      });
+      document.getElementById('clock').textContent = `Time: ${time}`;
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
 
 </body>
 </html>
