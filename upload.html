@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Image Buttons</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .button-container {
+      text-align: center;
+    }
+    .button-container img {
+      width: 100px;
+      height: 100px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+    .button-container img:hover {
+      transform: scale(1.1);
+    }
+    .button-container h3 {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background: goldenrod;
+      border: none;
+      border-radius: 5px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      max-width: 150px;
+    }
+    button:hover {
+      background: darkgoldenrod;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>অ্যাডমিন প্যানেল</h2>
+  <p>Andul Mojid creation</p>
+
+  <div class="container">
+    <!-- Button 1 -->
+    <div class="button-container">
+      <img src="add.png" alt="Button 1">
+      <h3>Add course video</h3>
+      <button onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSfYS4MhzIZGfqJTkIxHXKuZxk7ywQ2_7ZhTuwRY7ZaYuNDa2A/viewform?usp=header'">upload</button>
+    </div>
+
+    <!-- Button 2 -->
+    <div class="button-container">
+      <img src="https://via.placeholder.com/100" alt="Button 2">
+      <h3>পদক্ষেপ ২</h3>
+      <button onclick="window.location.href='admin-settings.html'">Go to Settings</button>
+    </div>
+
+    <!-- Button 3 -->
+    <div class="button-container">
+      <img src="https://via.placeholder.com/100" alt="Button 3">
+      <h3>পদক্ষেপ ৩</h3>
+      <button onclick="window.location.href='admin-reports.html'">View Reports</button>
+    </div>
+
+    <!-- Button 4 -->
+    <div class="button-container">
+      <img src="https://via.placeholder.com/100" alt="Button 4">
+      <h3>পদক্ষেপ ৪</h3>
+      <button onclick="window.location.href='admin-users.html'">Manage Users</button>
+    </div>
+  </div>
+
+</body>
+</html>

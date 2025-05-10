@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    #adminContent {
+      display: none;
+      margin-top: 50px;
+    }
+    input[type="password"] {
+      padding: 10px;
+      width: 80%;
+      max-width: 250px;
+      border: none;
+      border-radius: 5px;
+      margin: 10px;
+      background: #333;
+      color: #fff;
+    }
+    button {
+      padding: 10px 20px;
+      background: goldenrod;
+      border: none;
+      border-radius: 5px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      width: 80%;
+      max-width: 250px;
+    }
+    #error {
+      color: red;
+      margin-top: 10px;
+    }
+
+    /* প্রথম বাটন (পাসওয়ার্ড দেওয়ার আগে দেখা যাবে) */
+    .first-button {
+      padding: 10px 20px;
+      background: goldenrod;
+      border: none;
+      border-radius: 5px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      width: 80%;
+      max-width: 250px;
+    }
+
+    /* দ্বিতীয় বাটন (পাসওয়ার্ড দেওয়ার পর দেখাবে) */
+    .second-button {
+      display: none; /* প্রথমে হিডেন থাকবে */
+      padding: 10px 20px;
+      background: skyblue;
+      border: none;
+      border-radius: 5px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      width: 80%;
+      max-width: 250px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>শুধু অ্যাডমিনদের জন্য</h2>
+  <p>পাসওয়ার্ড দিন:</p>
+  <input type="password" id="passwordInput" placeholder="Enter password">
+  <br>
+  <button class="first-button" onclick="checkPassword()">Login</button> <!-- প্রথম বাটন -->
+  <button class="second-button" onclick="goToAdminDashboard()">Go to Admin Panel</button> <!-- দ্বিতীয় বাটন -->
+  <p id="error"></p>
+
+  <div id="adminContent">
+    <h1>Welcome, Admin!</h1>
+    <p>এটা হলো সিক্রেট অ্যাডমিন কনটেন্ট।</p>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const password = document.getElementById("passwordInput").value;
+      const adminContent = document.getElementById("adminContent");
+      const error = document.getElementById("error");
+
+      // পাসওয়ার্ড সঠিক হলে
+      if (password === "admin123") {
+        // অ্যাডমিন কনটেন্ট দেখাবে
+        adminContent.style.display = "block";
+        // প্রথম বাটন হিডেন করবে এবং দ্বিতীয় বাটন দেখাবে
+        document.querySelector(".first-button").style.display = "none";
+        document.querySelector(".second-button").style.display = "inline-block";
+      } else {
+        // ভুল পাসওয়ার্ড হলে
+        adminContent.style.display = "none";
+        error.innerText = "ভুল পাসওয়ার্ড!";
+      }
+    }
+
+    function goToAdminDashboard() {
+      window.location.href = "upload.html"; // রিডাইরেক্ট পেজের লিংক
+    }
+  </script>
+
+</body>
+</html>
