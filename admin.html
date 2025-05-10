@@ -1,216 +1,113 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abdulmojid Creations ভিডিও এডিটিং কোর্স</title>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Baloo Da 2', cursive;
+      font-family: Arial, sans-serif;
+      background: #111;
       color: #fff;
-      min-height: 100vh;
-      background: linear-gradient(45deg, #ff0055, black, #a020f0);
-      background-size: 600% 600%;
-      animation: gradientBG 10s ease infinite;
-      display: flex;
-      flex-direction: column;
-    }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    header {
-      backdrop-filter: blur(10px);
-      padding: 30px 20px;
       text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 4px 20px(0, 255, 255, 0.2);
+      padding: 50px 20px;
     }
-
-    header h1 {
-      font-size: 28px;
-      color: ghostwhite;
-      margin-bottom: 10px;
-    }
-
-    header p {
-      font-size: 16px;
-      color: hotpink;
-    }
-
-    nav {
-      margin-top: 25px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: #fff;
-      transition: 0.4s ease;
-    }
-
-    nav a img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      border: 2px solid cornsilk;
-      box-shadow: 0 0 0px white;
-      margin-bottom: 8px;
-      transition: transform 0.3s ease;
-    }
-
-    nav a:hover img {
-      transform: scale(1.1);
-    }
-
-    nav a span {
-      font-size: 14px;
-      text-shadow: 0 0 2px black;
-    }
-
-    .admin-photo {
-      text-align: center;
+    #adminContent {
+      display: none;
       margin-top: 50px;
     }
-
-    .admin-photo img {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      border: 4px solid gray;
-      box-shadow: 0 0 25px floralwhite;
-      transition: transform 0.3s ease;
+    input[type="password"] {
+      padding: 10px;
+      width: 80%;
+      max-width: 250px;
+      border: none;
+      border-radius: 5px;
+      margin: 10px;
+      background: #333;
+      color: #fff;
+    }
+    button {
+      padding: 10px 20px;
+      background: goldenrod;
+      border: none;
+      border-radius: 5px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      width: 80%;
+      max-width: 250px;
+    }
+    #error {
+      color: red;
+      margin-top: 10px;
     }
 
-    .admin-photo img:hover {
-      transform: scale(1.1);
+    /* প্রথম বাটন (পাসওয়ার্ড দেওয়ার আগে দেখা যাবে) */
+    .first-button {
+      padding: 10px 20px;
+      background: goldenrod;
+      border: none;
+      border-radius: 5px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      width: 80%;
+      max-width: 250px;
     }
 
-    .admin-photo p {
-      margin-top: 12px;
-      font-size: 22px;
-      color: #ffffff;
-      text-shadow: 1px 1px 3px #000;
-    }
-
-    .intro {
-      max-width: 800px;
-      margin: 60px auto;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 30px;
-      border-radius: 20px;
-      text-align: center;
-      backdrop-filter: blur(12px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
-    }
-
-    .intro h2 {
-      font-size: 28px;
-      margin-bottom: 15px;
-      color: #ffffff;
-    }
-
-    .intro p {
-      font-size: 18px;
-      line-height: 1.8;
-      color: #ddd;
-    }
-
-    .clock-bottom {
-      text-align: center;
-      font-size: 20px;
-      color: lightyellow;
-      margin: 20px 0 10px;
-    }
-
-    footer {
-      background: rgba(0, 0, 0, 0.7);
-      text-align: center;
-      color: #ccc;
-      padding: 20px;
-      font-size: 14px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    @media (max-width: 600px) {
-      header h1 { font-size: 24px; }
-      nav a span { font-size: 12px; }
-      .intro { margin: 30px 15px; }
+    /* দ্বিতীয় বাটন (পাসওয়ার্ড দেওয়ার পর দেখাবে) */
+    .second-button {
+      display: none; /* প্রথমে হিডেন থাকবে */
+      padding: 10px 20px;
+      background: skyblue;
+      border: none;
+      border-radius: 5px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      width: 80%;
+      max-width: 250px;
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>𝑨𝑩𝑫𝑼𝑳 𝑴𝑶𝑱𝑰𝑫 𝑪𝑹𝑬𝑨𝑻𝑰𝑶𝑵</h1>
-    <p>CapCut ও Alight Motion এর প্রিমিয়াম কোর্স এক জায়গায়</p>
-  </header>
+  <h2>শুধু অ্যাডমিনদের জন্য</h2>
+  <p>পাসওয়ার্ড দিন:</p>
+  <input type="password" id="passwordInput" placeholder="Enter password">
+  <br>
+  <button class="first-button" onclick="checkPassword()">Login</button> <!-- প্রথম বাটন -->
+  <button class="second-button" onclick="goToAdminDashboard()">Go to Admin Panel</button> <!-- দ্বিতীয় বাটন -->
+  <p id="error"></p>
 
-  <nav>
-    <a href="index.html">
-      <img src="home.png" alt="হোম" />
-      <span>Home</span>
-    </a>
-    <a href="courses.html">
-      <img src="course.png" alt="কোর্সসমূহ" />
-      <span>কোর্সসমূহ</span>
-    </a>
-    <a href="details.html">
-      <img src="chat.png" alt="যোগাযোগ" />
-      <span>যোগাযোগ</span>
-    </a>
-  </nav>
-
-  <section class="admin-photo">
-    <img src="abdulmojid.jpg" alt="Abdul Mojid">
-    <p>• Abdul Mojid •</p>
-  </section>
-
-  <section class="intro">
-    <h2>কেন আমাদের কোর্স করবেন?</h2>
-    <p>
-      CapCut ও Alight Motion নিয়ে আমাদের নতুন প্রফেশনাল কোর্স আপনাকে শেখাবে মোশন ডিজাইন, ট্রানজিশন, ভেক্টর এনিমেশন, টেক্সট এফেক্টসহ আরও অনেক কিছু।
-      সম্পূর্ণ বাংলা ভাষায় ব্যাখ্যা করা সহজ ভিডিওর মাধ্যমে আপনি হয়ে উঠবেন একজন দক্ষ এডিটর।
-    </p>
-  </section>
-
-  <!-- Clock at Bottom -->
-  <div class="clock-bottom" id="clock"></div>
-
-  <footer>
-    <p>© ২০২৫ AM Video Course | Powered by Abdul Mojid | Designed by Imam Hossen Rohan</p>
-  </footer>
+  <div id="adminContent">
+    <h1>Welcome, Admin!</h1>
+    <p>এটা হলো সিক্রেট অ্যাডমিন কনটেন্ট।</p>
+  </div>
 
   <script>
-    function updateClock() {
-      const now = new Date();
-      const time = now.toLocaleTimeString('bn-BD', {
-        hour: 'numeric',
-        minute: 'numeric',
-        second: 'numeric',
-        hour12: true
-      });
-      document.getElementById('clock').textContent = `Time: ${time}`;
+    function checkPassword() {
+      const password = document.getElementById("passwordInput").value;
+      const adminContent = document.getElementById("adminContent");
+      const error = document.getElementById("error");
+
+      // পাসওয়ার্ড সঠিক হলে
+      if (password === "admin123") {
+        // অ্যাডমিন কনটেন্ট দেখাবে
+        adminContent.style.display = "block";
+        // প্রথম বাটন হিডেন করবে এবং দ্বিতীয় বাটন দেখাবে
+        document.querySelector(".first-button").style.display = "none";
+        document.querySelector(".second-button").style.display = "inline-block";
+      } else {
+        // ভুল পাসওয়ার্ড হলে
+        adminContent.style.display = "none";
+        error.innerText = "ভুল পাসওয়ার্ড!";
+      }
     }
 
-    setInterval(updateClock, 1000);
-    updateClock();
+    function goToAdminDashboard() {
+      window.location.href = "upload.html"; // রিডাইরেক্ট পেজের লিংক
+    }
   </script>
 
 </body>
