@@ -163,11 +163,22 @@
     &copy; ২০২৫ AM Course | Powered by Abdul Mojid
   </footer>
 
+  <!-- Sound files -->
+  <audio id="bkashSound" src="noti1.mp3"></audio>
+  <audio id="nagadSound" src="warning.mp3"></audio>
+
   <script>
     function copyToClipboard(id) {
       var text = document.getElementById(id).innerText;
       navigator.clipboard.writeText(text).then(function () {
         alert("নম্বর কপি হয়েছে: " + text);
+
+        // Play sound based on ID
+        if (id === "bkash") {
+          document.getElementById("bkashSound").play();
+        } else if (id === "nagad") {
+          document.getElementById("nagadSound").play();
+        }
       });
     }
 

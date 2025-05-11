@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Abdul Mojid AI Help</title>
+  <style>
+    body {
+      margin: 0;
+      background: #1e1e2f;
+      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      height: 86vh;
+    }
+
+    header {
+      background: #29293d;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    #chat-box {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 17px;
+    }
+
+    .message {
+      max-width: 80%;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 16px;
+      line-height: 1.5;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      position: relative;
+    }
+
+    .user {
+      background: linear-gradient(to right,  #00bcd4,  #00bcd1);
+      align-self: flex-end;
+      border-bottom-right-radius: 0;
+    }
+
+    .bot {
+      background: #333a59;
+      align-self: flex-start;
+      border-bottom-left-radius: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-area {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background: #29293d;
+      border-top: 1px solid #444;
+    }
+
+    .lang-switch-btn {
+      background: none;
+      border: none;
+      margin-right: 10px;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .lang-switch-pic {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    #user-input {
+      flex: 1;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      outline: none;
+      background: lightgray;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px 18px;
+      background: linear-gradient(to right, #ff7e5f, #feb47b);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: gray;
+    }
+
+    .loader {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #fff;
+      border-top: 3px solid #00bcd4;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-left: 10px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: red;
+      color: white;
+      padding: 4px 8px;
+      font-size: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background: darkred;
+    }
+
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+
+    .msg-content {
+      max-width: calc(100% - 50px);
+    }
+
+    .menu-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    ABDUL MOJID AI HELP ✈
+    <button class="menu-btn" onclick="moreOptions()">
+      <img src="abdulmojid.jpg" alt="Menu" class="profile-pic" />☰
+    </button>
+  </header>
+
+  <div id="chat-box"></div>
+
+  <div class="input-area">
+    <button class="lang-switch-btn" onclick="changeLanguage()">
+      <img src="lcng.png" alt="Lang" class="lang-switch-pic" />
+    </button>
+    <input type="text" id="user-input" placeholder="Type your message..." />
+    <button onclick="playSendSound(); sendMessage()">Send</button>
+  </div>
+
+  <!-- Sound -->
+  <audio id="click-sound" src="noti2.mp3" preload="auto"></audio>
+  <audio id="send-sound" src="noti1.mp3" preload="auto"></audio>
+
+  <script>
+    const chatBox = document.getElementById("chat-box");
+    const userInput = document.getElementById("user-input");
+
+    let language = "en";
+
+    function changeLanguage() {
+      language = language === "en" ? "bn" : "en";
+      alert("Language changed to: " + (language === "en" ? "English" : "Bangla"));
+    }
+
+    function playClickSound() {
+      const clickSound = document.getElementById("click-sound");
+      clickSound.currentTime = 0;
+      clickSound.play();
+    }
+
+    function playSendSound() {
+      const sendSound = document.getElementById("send-sound");
+      sendSound.currentTime = 0;
+      sendSound.play();
+    }
+
+    async function sendMessage() {
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      const blockedWords = ['google'];
+      if (blockedWords.some(word => message.includes(word))) {
+        appendMessage("Abdul Mojid AI", "Sorry, I cannot respond about 'Gemini'. Please ask something else.", "bot");
+        return;
+      }
+
+      appendMessage("You", message, "user");
+      userInput.value = "";
+
+      const loader = document.createElement("div");
+      loader.className = "message bot";
+      loader.id = "loader";
+      loader.innerHTML = "AI is typing... <span class='loader'></span>";
+      chatBox.appendChild(loader);
+      scrollToBottom();
+
+      const apiKey = "AIzaSyCMrD3qQZB4rDsIdeCDC7p-9YdAD86Hn8U";
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+      const body = {
+        contents: [
+          {
+            parts: [{ text: message }]
+          }
+        ]
+      };
+
+      try {
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+
+        const data = await res.json();
+        document.getElementById("loader").remove();
+
+        if (data?.candidates?.length > 0) {
+          let reply = data.candidates[0].content.parts[0].text;
+          reply = reply.replace(/Google/gi, "Abdul Mojid AI");
+          appendMessage("ABDUL MOJID AI", reply, "bot");
+        } else {
+          appendMessage("ABDUL MOJID AI", "No response from AI.", "bot");
+        }
+      } catch (err) {
+        document.getElementById("loader").remove();
+        appendMessage("ABDUL MOJID AI", "Error: " + err.message, "bot");
+      }
+    }
+
+    function appendMessage(sender, text, type) {
+      const msg = document.createElement("div");
+      msg.className = "message " + type;
+
+      const linkedText = text.replace(
+        /(https?:\/\/[^\s]+)/g,
+        '<a href="$1" target="_blank" style="color:#00bcd4; text-decoration:underline;">$1</a>'
+      );
+
+      if (type === "bot") {
+        msg.innerHTML = `
+          <img src="abdulmojid.jpg" class="profile-pic" alt="AI" />
+          <div class="msg-content">
+            <strong>${sender}:</strong> ${linkedText}
+          </div>
+        `;
+      } else {
+        msg.innerHTML = `<strong>${sender}:</strong> ${linkedText}`;
+      }
+
+      chatBox.appendChild(msg);
+
+      msg.addEventListener("mousedown", (e) => {
+        let timer;
+        if (e.button === 0) {
+          timer = setTimeout(() => {
+            if (type === "bot") {
+              addDeleteButton(msg);
+            }
+          }, 1000);
+        }
+        msg.addEventListener("mouseup", () => {
+          clearTimeout(timer);
+        });
+      });
+
+      scrollToBottom();
+    }
+
+    function addDeleteButton(messageElement) {
+      const deleteButton = document.createElement("button");
+      deleteButton.classList.add("delete-btn");
+      deleteButton.innerHTML = "Delete";
+      deleteButton.onclick = function () {
+        messageElement.remove();
+      };
+      messageElement.appendChild(deleteButton);
+    }
+
+    function scrollToBottom() {
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    userInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        playClickSound();
+        sendMessage();
+      }
+    });
+
+    function moreOptions() {
+      window.location.href = 'details.html';
+    }
+  </script>
+</body>
+</html>
