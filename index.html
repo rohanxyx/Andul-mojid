@@ -211,6 +211,23 @@
       visibility: visible;
       transform: translate(-50%, -50%) scale(1);
     }
+
+    .video-section {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    .video-section video {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
   </style>
 </head>
 <body>
@@ -240,6 +257,13 @@
     <p>CapCut ও Alight Motion নিয়ে আমাদের নতুন প্রফেশনাল কোর্স আপনাকে শেখাবে মোশন ডিজাইন, ট্রানজিশন, ভেক্টর এনিমেশন, টেক্সট এফেক্টসহ আরও অনেক কিছু। সম্পূর্ণ বাংলা ভাষায় ব্যাখ্যা করা সহজ ভিডিওর মাধ্যমে আপনি হয়ে উঠবেন একজন দক্ষ এডিটর।</p>
   </section>
 
+  <div class="video-section">
+    <video controls controlsList="nodownload" oncontextmenu="return false;">
+      <source src="your-video.mp4" type="video/mp4">
+      আপনার ব্রাউজার এই ভিডিও সাপোর্ট করে না।
+    </video>
+  </div>
+
   <div class="clock-bottom" id="clock"></div>
 
   <div class="bottom-logos">
@@ -254,7 +278,7 @@
 
   <div id="notification">Assalamualaikum</div>
 
-  <audio id="homeSound" src="home.mp3"></audio>
+  <audio id="homeSound" src="tap.mp3"></audio>
   <audio id="courseSound" src="noti2.mp3"></audio>
   <audio id="contactSound" src="noti1.mp3"></audio>
   <audio id="adminSound" src="noti3.mp3"></audio>
@@ -272,7 +296,7 @@
       audio.play();
       setTimeout(() => {
         window.location.href = url;
-      }, 500);
+      }, 800);
     }
 
     document.getElementById("homeBtn").addEventListener("click", function(e) {
