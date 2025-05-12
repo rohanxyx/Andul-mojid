@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abdulmojid Creations ভিডিও এডিটিং কোর্স</title>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Baloo Da 2', cursive;
+      color: #fff;
+      min-height: 100vh;
+      background: linear-gradient(45deg, #ff0055, black, #a020f0);
+      background-size: 600% 600%;
+      animation: gradientBG 10s ease infinite;
+      display: flex;
+      flex-direction: column;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    header {
+      backdrop-filter: blur(10px);
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 0px 0px rgba(0, 255, 255, 0.2);
+    }
+    header h1 {
+      font-size: 28px;
+      color: ghostwhite;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 16px;
+      color: skyblue;
+    }
+    nav {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: #fff;
+      transition: 0.4s ease;
+    }
+    nav a img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid whitesmoke;
+      box-shadow: 10 0 0px white;
+      margin-bottom: 8px;
+      transition: transform 0.3s ease;
+    }
+    nav a:hover img {
+      transform: scale(1.1);
+    }
+    nav a span {
+      font-size: 14px;
+ 
+      text-shadow: 0 0 2px black;
+    }
+    .admin-photo {
+      text-align: center;
+      margin-top: 50px;
+    }
+    .admin-photo img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid goldenrod;
+      box-shadow: 0 0 12px indianred;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      background-color: darkgoldenrod;
+      padding: 5px;
+    }
+    .admin-photo img:hover {
+      transform: scale(1.1);
+    }
+    .admin-photo p {
+      margin-top: 12px;
+      font-size: 22px;
+      color: #ffffff;
+      text-shadow: 1px 1px 3px #000;
+    }
+    .intro {
+      max-width: 800px;
+      margin: 60px auto;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .intro h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #ffffff;
+    }
+    .intro p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #ddd;
+    }
+    .clock-bottom {
+      text-align: center;
+      font-size: 20px;
+      color: lightyellow;
+      margin: 20px 0 10px;
+    }
+    .bottom-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      padding: 20px 0;
+    }
+    .bottom-logos img {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      padding: 6px;
+      background: darkgray;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2),
+                  0 0 20px rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(6px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .bottom-logos img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.6),
+                  0 0 30px rgba(255, 0, 128, 0.4);
+    }
+    footer {
+      background: rgba(0, 0, 0, 0.7);
+      text-align: center;
+      color: #ccc;
+      padding: 20px;
+      font-size: 14px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 24px; }
+      nav a span { font-size: 12px; }
+      .intro { margin: 30px 15px; }
+    }
+    #notification {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: linear-gradient(135deg, #00ff88, #0077ff);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: transform 0.5s ease, opacity 0.5s ease, visibility 0.5s ease;
+      z-index: 9999;
+    }
+    #notification.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+    .popup-photo {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.7);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 20px;
+      border: 3px solid gold;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+      transition: opacity 0.5s ease, transform 1s ease;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 9998;
+    }
+    .popup-photo img {
+      width: 220px;
+      height: auto;
+      border-radius: 15px;
+      animation: glowPop 1s ease-out;
+    }
+    @keyframes glowPop {
+      0% { transform: scale(0.5); opacity: 0; }
+      100% { transform: scale(1.05); opacity: 1; }
+    }
+    .popup-photo.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .video-section {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    .video-section video {
+      width: 60%;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>𝑨𝑩𝑫𝑼𝑳 𝑴𝑶𝑱𝑰𝑫 𝑪𝑹𝑬𝑨𝑻𝑰𝑶𝑵</h1>
+    <p>CapCut ও Alight Motion এর প্রিমিয়াম কোর্স এক জায়গায়</p>
+  </header>
+
+  <nav>
+    <a href="index.html" id="homeBtn"><img src="home.png" alt="হোম" /><span>Home</span></a>
+    <a href="courses.html" id="courseBtn"><img src="course.png" alt="কোর্সসমূহ" /><span>কোর্সসমূহ</span></a>
+    <a href="ai.html" id="aiBtn"><img src="ai.png" alt="AI" /><span>Ai Help</span></a>
+    <a href="#" id="contactBtn"><img src="chat.png" alt="যোগাযোগ" /><span>contact</span></a>
+  </nav>
+
+  <section class="admin-photo">
+    <img src="abdulmojid.jpg" alt="Abdul Mojid" id="adminImg">
+    <p>•𝓐𝓫𝓭𝓾𝓵 𝓜𝓸𝓳𝓲𝓭•</p>
+  </section>
+
+  <div class="popup-photo" id="popupPhoto">
+    <img src="mojidbb.png" alt="অ্যাডমিনের বিশেষ ছবি" />
+  </div>
+
+  <section class="intro">
+    <h2>কেন আমাদের কোর্স করবেন?</h2>
+    <p>CapCut ও Alight Motion নিয়ে আমাদের নতুন প্রফেশনাল কোর্স আপনাকে শেখাবে মোশন ডিজাইন, ট্রানজিশন, ভেক্টর এনিমেশন, টেক্সট এফেক্টসহ আরও অনেক কিছু। সম্পূর্ণ বাংলা ভাষায় ব্যাখ্যা করা সহজ ভিডিওর মাধ্যমে আপনি হয়ে উঠবেন একজন দক্ষ এডিটর।</p>
+  </section>
+
+  <div class="video-section">
+    <video controls controlsList="nodownload" oncontextmenu="return false;">
+      <source src="https://heroic-bublanina-82032a.netlify.app/v.mp4" type="video/mp4">
+      আপনার ব্রাউজার এই ভিডিও সাপোর্ট করে না।
+    </video>
+  </div>
+
+  <div class="clock-bottom" id="clock"></div>
+
+  <div class="bottom-logos">
+    <img src="apple.png" alt="Apple" />
+    <img src="android.png" alt="Android" />
+    <img src="windows.png" alt="Windows" />
+  </div>
+
+  <footer>
+    <p>© ২০২৫ AM Video Course | Powered by Abdul Mojid | Designed by Imam Hossen Rohan</p>
+  </footer>
+
+  <div id="notification">Assalamualaikum</div>
+
+  <audio id="homeSound" src="tap.mp3"></audio>
+  <audio id="courseSound" src="noti2.mp3"></audio>
+  <audio id="contactSound" src="noti1.mp3"></audio>
+  <audio id="aiSound" src="warning.mp3"></audio>
+  <audio id="adminSound" src="noti3.mp3"></audio>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString('bn-BD', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+      document.getElementById('clock').textContent = `Time: ${time}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function delayedRedirect(audio, url) {
+      audio.play();
+      setTimeout(() => {
+        window.location.href = url;
+      }, 800);
+    }
+
+    document.getElementById("homeBtn").addEventListener("click", function(e) {
+      e.preventDefault();
+      delayedRedirect(homeSound, "index.html");
+    });
+    document.getElementById("courseBtn").addEventListener("click", function(e) {
+      e.preventDefault();
+      delayedRedirect(courseSound, "courses.html");
+      document.getElementById("aiBtn").addEventListener("click", function(e) {
+  e.preventDefault();
+  delayedRedirect(aiSound, "ai.html");
+});
+    });
+    document.getElementById("contactBtn").addEventListener("click", function(e) {
+      e.preventDefault();
+      delayedRedirect(contactSound, "details.html");
+    });
+
+    const adminImg = document.getElementById("adminImg");
+    const adminSound = document.getElementById("adminSound");
+    const popupPhoto = document.getElementById("popupPhoto");
+
+    adminImg.addEventListener("click", () => {
+      adminSound.play();
+
+      const notification = document.getElementById("notification");
+      notification.classList.add("show");
+      setTimeout(() => {
+        notification.classList.remove("show");
+      }, 2000);
+
+      popupPhoto.classList.add("show");
+      setTimeout(() => {
+        popupPhoto.classList.remove("show");
+      }, 2500);
+    });
+  </script>
+  <script>
+  document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+<script>
+  document.onkeydown = function(e) {
+    if (e.keyCode == 123 || // F12
+      (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) || // Ctrl+Shift+I
+      (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) { // Ctrl+U
+      return false;
+    }
+  };
+</script>
+
+</body>
+</html>
