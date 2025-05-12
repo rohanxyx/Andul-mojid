@@ -7,17 +7,17 @@
   <style>
     body {
       margin: 0;
-      background: #1e1e2f;
+      background: linear-gradient(to bottom, black ,#333a59 );
       font-family: 'Segoe UI', sans-serif;
       color: #fff;
       display: flex;
       flex-direction: column;
-      height: 86vh;
+      height: 88vh;
     }
 
     header {
-      background: #29293d;
-      padding: 15px 20px;
+      background: linear-gradient(to top, #29293d, #29293d );
+      padding: 7px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -43,10 +43,11 @@
       word-wrap: break-word;
       white-space: pre-wrap;
       position: relative;
+      transition: all 0.3s ease;
     }
 
     .user {
-      background: linear-gradient(to right,  #00bcd4,  #00bcd1);
+      background: linear-gradient(to right, skyblue, #00bcd1);
       align-self: flex-end;
       border-bottom-right-radius: 0;
     }
@@ -101,10 +102,11 @@
       color: white;
       font-size: 17px;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
 
     button:hover {
-      background: gray;
+      background: dimgray;
     }
 
     .loader {
@@ -112,7 +114,7 @@
       width: 20px;
       height: 20px;
       border: 3px solid #fff;
-      border-top: 3px solid #00bcd4;
+      border-top: 3px solid goldenrod;
       border-radius: 50%;
       animation: spin 1s linear infinite;
       margin-left: 10px;
@@ -134,6 +136,7 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
 
     .delete-btn:hover {
@@ -160,14 +163,19 @@
       cursor: pointer;
       display: flex;
       align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .menu-btn:hover {
+      transform: scale(1.1);
     }
   </style>
 </head>
 <body>
   <header>
-    ABDUL MOJID AI HELP ✈
+    ABDUL MOJID Ai HELP
     <button class="menu-btn" onclick="moreOptions()">
-      <img src="abdulmojid.jpg" alt="Menu" class="profile-pic" />☰
+      <img src="abdulmojid.jpg" alt="Menu" class="profile-pic" />
     </button>
   </header>
 
@@ -214,7 +222,7 @@
 
       const blockedWords = ['google'];
       if (blockedWords.some(word => message.includes(word))) {
-        appendMessage("Abdul Mojid AI", "Sorry, I cannot respond about 'Gemini'. Please ask something else.", "bot");
+        appendMessage("Abdul Mojid Ai", "Sorry, I cannot respond about 'Gemini'. Please ask something else.", "bot");
         return;
       }
 
@@ -224,7 +232,7 @@
       const loader = document.createElement("div");
       loader.className = "message bot";
       loader.id = "loader";
-      loader.innerHTML = "AI is typing... <span class='loader'></span>";
+      loader.innerHTML = "Ai is typing... <span class='loader'></span>";
       chatBox.appendChild(loader);
       scrollToBottom();
 
@@ -252,7 +260,7 @@
         if (data?.candidates?.length > 0) {
           let reply = data.candidates[0].content.parts[0].text;
           reply = reply.replace(/Google/gi, "Abdul Mojid AI");
-          appendMessage("ABDUL MOJID AI", reply, "bot");
+          appendMessage("ABDUL MOJID Ai", reply, "bot");
         } else {
           appendMessage("ABDUL MOJID AI", "No response from AI.", "bot");
         }
