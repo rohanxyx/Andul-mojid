@@ -71,6 +71,7 @@
     }
     nav a span {
       font-size: 14px;
+ 
       text-shadow: 0 0 2px black;
     }
     .admin-photo {
@@ -224,7 +225,7 @@
     }
 
     .video-section video {
-      width: 100%;
+      width: 60%;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     }
@@ -260,7 +261,7 @@
 
   <div class="video-section">
     <video controls controlsList="nodownload" oncontextmenu="return false;">
-      <source src="your-video.mp4" type="video/mp4">
+      <source src="https://heroic-bublanina-82032a.netlify.app/v.mp4" type="video/mp4">
       আপনার ব্রাউজার এই ভিডিও সাপোর্ট করে না।
     </video>
   </div>
@@ -337,6 +338,18 @@
       }, 2500);
     });
   </script>
+  <script>
+  document.addEventListener('contextmenu', event => event.preventDefault());
+</script>
+<script>
+  document.onkeydown = function(e) {
+    if (e.keyCode == 123 || // F12
+      (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) || // Ctrl+Shift+I
+      (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) { // Ctrl+U
+      return false;
+    }
+  };
+</script>
 
 </body>
 </html>
