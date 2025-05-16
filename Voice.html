@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>Voice to Text</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #111;
+      color: #fff;
+      font-family: sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    h2 {
+      color: #00f7ff;
+    }
+    #output {
+      background: #222;
+      border: 2px solid #00f7ff;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 10px;
+      min-height: 100px;
+      font-size: 18px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 12px 20px;
+      background: #00f7ff;
+      color: #000;
+      border: none;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    select {
+      padding: 8px;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🎤 Voice to Text Converter</h2>
+  <select id="language">
+    <option value="bn-BD">বাংলা (Bangla)</option>
+    <option value="en-US">English (US)</option>
+  </select>
+  <br>
+  <button onclick="startRecognition()">🎙️ Speak Now</button>
+  <div id="output">আপনার বলা শব্দ এখানে দেখাবে...</div>
+  <button onclick="copyText()">📋 Copy Text</button>
+
+  <script>
+    const output = document.getElementById('output');
+
+    function startRecognition() {
+      const lang = document.getElementById('language').value;
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        alert("Your browser does not support Speech Recognition.");
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = lang;
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onstart = () => {
+        output.innerText = "🎙️ Listening...";
+      };
+
+      recognition.onerror = (e) => {
+        output.innerText = "❌ Error: " + e.error;
+      };
+
+      recognition.onresult = (event) => {
+        const text = event.results[0][0].transcript;
+        output.innerText = text;
+      };
+
+      recognition.start();
+    }
+
+    function copyText() {
+      const text = output.innerText;
+      navigator.clipboard.writeText(text);
+      alert("✅ Text copied!");
+    }
+  </script>
+
+</body>
+</html>
