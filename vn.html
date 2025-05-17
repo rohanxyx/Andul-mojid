@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Secure Embed</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #000;
+    }
+    #loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      font-family: sans-serif;
+    }
+    .spinner {
+      border: 5px solid goldenrod;
+      border-top: 8px solid dimgray;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 2s linear infinite;
+      margin: 0 auto 10px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+    #no-internet {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: indianred;
+      font-size: 20px;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="spinner"></div>
+  <div>Loading...</div>
+</div>
+
+<div id="no-internet">No Internet Connection. Waiting to reconnect...</div>
+
+<iframe id="mainFrame"></iframe>
+
+<script>
+  const iframe = document.getElementById("mainFrame");
+  const loader = document.getElementById("loader");
+  const noInternet = document.getElementById("no-internet");
+
+  const encodedURL = "aHR0cHM6Ly9hYmR1bG1vamlkLnBhZ2VzLmRldi9tbW1t"; // base64
+  const decodedURL = atob(encodedURL); // decode to real link
+
+  function loadFrame() {
+    fetch(decodedURL, {mode: "no-cors"})
+      .then(() => {
+        iframe.src = decodedURL;
+        iframe.style.display = "block";
+        loader.style.display = "none";
+        noInternet.style.display = "none";
+      })
+      .catch(() => {
+        loader.style.display = "none";
+        noInternet.style.display = "block";
+        setTimeout(checkConnection, 3000);
+      });
+  }
+
+  function checkConnection() {
+    loader.style.display = "block";
+    noInternet.style.display = "none";
+    loadFrame();
+  }
+
+  window.addEventListener('load', () => {
+    loadFrame();
+  });
+</script>
+
+</body>
+</html>
