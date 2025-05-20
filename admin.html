@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin Panel</title>
   <style>
     body {
@@ -11,12 +11,13 @@
       color: #fff;
       text-align: center;
       padding: 50px 20px;
+      user-select: none;
     }
     #adminContent {
       display: none;
       margin-top: 50px;
     }
-    input[type="password"] {
+    input[type="password"], button {
       padding: 10px;
       width: 80%;
       max-width: 250px;
@@ -27,57 +28,30 @@
       color: #fff;
     }
     button {
-      padding: 10px 20px;
       background: goldenrod;
-      border: none;
-      border-radius: 5px;
       color: black;
       font-weight: bold;
       cursor: pointer;
-      width: 80%;
-      max-width: 250px;
     }
     #error {
       color: red;
-      margin-top: 10px;
     }
-
-    /* প্রথম বাটন (পাসওয়ার্ড দেওয়ার আগে দেখা যাবে) */
-    .first-button {
-      padding: 10px 20px;
-      background: goldenrod;
-      border: none;
-      border-radius: 5px;
-      color: black;
-      font-weight: bold;
-      cursor: pointer;
-      width: 80%;
-      max-width: 250px;
-    }
-
-    /* দ্বিতীয় বাটন (পাসওয়ার্ড দেওয়ার পর দেখাবে) */
+    .first-button { background: goldenrod; }
     .second-button {
-      display: none; /* প্রথমে হিডেন থাকবে */
-      padding: 10px 20px;
+      display: none;
       background: skyblue;
-      border: none;
-      border-radius: 5px;
       color: black;
-      font-weight: bold;
-      cursor: pointer;
-      width: 80%;
-      max-width: 250px;
     }
   </style>
 </head>
-<body>
+<body oncontextmenu="return false" onkeydown="return disableKeys(event)">
 
   <h2>শুধু অ্যাডমিনদের জন্য</h2>
   <p>পাসওয়ার্ড দিন:</p>
-  <input type="password" id="passwordInput" placeholder="Enter password">
-  <br>
-  <button class="first-button" onclick="checkPassword()">Login</button> <!-- প্রথম বাটন -->
-  <button class="second-button" onclick="goToAdminDashboard()">Go to Admin Panel</button> <!-- দ্বিতীয় বাটন -->
+  <input type="password" id="passwordInput" placeholder="Enter password" />
+  <br />
+  <button class="first-button" onclick="checkPassword()">Login</button>
+  <button class="second-button" onclick="goToAdminDashboard()">Go to Admin Panel</button>
   <p id="error"></p>
 
   <div id="adminContent">
@@ -86,27 +60,35 @@
   </div>
 
   <script>
-    function checkPassword() {
-      const password = document.getElementById("passwordInput").value;
-      const adminContent = document.getElementById("adminContent");
-      const error = document.getElementById("error");
+    function disableKeys(e) {
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) ||
+        (e.ctrlKey && e.key === "U")
+      ) {
+        alert("এই কাজটি নিষিদ্ধ!");
+        return false;
+      }
+    }
 
-      // পাসওয়ার্ড সঠিক হলে
-      if (password === "admin123") {
-        // অ্যাডমিন কনটেন্ট দেখাবে
-        adminContent.style.display = "block";
-        // প্রথম বাটন হিডেন করবে এবং দ্বিতীয় বাটন দেখাবে
+    const p1 = atob("YWRtaW4xMjM=");
+    const u1 = atob("dXBsb2FkLmh0bWw=");
+
+    function checkPassword() {
+      const userInput = document.getElementById("passwordInput").value;
+      const error = document.getElementById("error");
+      if (userInput === p1) {
+        document.getElementById("adminContent").style.display = "block";
         document.querySelector(".first-button").style.display = "none";
         document.querySelector(".second-button").style.display = "inline-block";
+        error.innerText = "";
       } else {
-        // ভুল পাসওয়ার্ড হলে
-        adminContent.style.display = "none";
-        error.innerText = "ভুল পাসওয়ার্ড!";
+        error.innerText = "❌ ভুল পাসওয়ার্ড!";
       }
     }
 
     function goToAdminDashboard() {
-      window.location.href = "upload.html"; // রিডাইরেক্ট পেজের লিংক
+      window.location.href = u1;
     }
   </script>
 

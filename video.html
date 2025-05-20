@@ -1,122 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Secure Video</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ভিডিও পেজ (Password Protected)</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #1d2b64, #f8cdda, #1fa2ff);
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color: white;
-    }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .container {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    .video-container {
-      background-color: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .video-title {
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 15px;
+      background: #111;
       color: #fff;
-      text-shadow: 1px 1px 4px #000;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px 20px;
+      user-select: none;
     }
-
-    .password-input {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 20px;
+    input[type="password"], button {
+      padding: 10px;
+      width: 80%;
+      max-width: 300px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
     }
-
     input[type="password"] {
-      padding: 12px;
-      width: 90%;
-      max-width: 300px;
-      font-size: 16px;
-      border-radius: 8px;
-      border: none;
-      outline: none;
-      margin-bottom: 10px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+      background: #333;
+      color: #fff;
     }
-
     button {
-      padding: 12px 20px;
-      font-size: 16px;
-      background-color: #00c9a7;
-      color: white;
-      border: none;
-      border-radius: 8px;
+      background: goldenrod;
+      color: black;
+      font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s;
-      width: 90%;
-      max-width: 300px;
     }
-
-    button:hover {
-      background-color: #007e6a;
+    #error {
+      color: #ff6666;
+      margin: 10px 0;
     }
-
+    #videoContainer {
+      margin-top: 30px;
+      display: none;
+    }
     video {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      max-width: 100%;
+      border-radius: 10px;
+      outline: none;
     }
   </style>
 </head>
-<body>
+<body oncontextmenu="return false" onkeydown="return disableKeys(event)">
 
-  <div class="container">
-    <div class="video-container" id="video1">
-      <div class="video-title">Alight Motion and capcut combo Tutorial 1</div>
-      <div class="password-input" id="input-area">
-        <input type="password" id="password1" placeholder="Enter Password">
-        <button onclick="checkPassword()">Play Video</button>
-      </div>
-      <div id="video1-container"></div>
-    </div>
+  <h2>ভিডিও দেখার জন্য পাসওয়ার্ড দিন</h2>
+  <input type="password" id="passwordInput" placeholder="পাসওয়ার্ড দিন" />
+  <br />
+  <button onclick="checkPassword()">দেখুন</button>
+  <p id="error"></p>
+
+  <div id="videoContainer">
+    <video controls id="myVideo" src="" type="video/mp4"></video>
   </div>
 
-  <script>
-    const correctPassword = 'video123'; // Change to your password
-    const videoUrl = 'https://www.w3schools.com/html/mov_bbb.mp4'; // Change to your video URL
-
-    function checkPassword() {
-      const enteredPassword = document.getElementById('password1').value;
-      if (enteredPassword === correctPassword) {
-        document.getElementById('input-area').style.display = 'none';
-        document.getElementById('video1-container').innerHTML = `
-          <video controls controlsList="nodownload" oncontextmenu="return false">
-            <source src="${videoUrl}" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        `;
-      } else {
-        alert('Incorrect password. Please try again.');
-      }
+<script>
+  const correctPassword = atob("YWRtaW4xMjM=");
+  const videoSrc = atob("aHR0cHM6Ly9leGFtcGxlLmNvbS92aWRlb3MvbmV3dmlkZW8ubXA0");
+  
+  function checkPassword() {
+    const input = document.getElementById("passwordInput").value;
+    const error = document.getElementById("error");
+    const videoContainer = document.getElementById("videoContainer");
+    const video = document.getElementById("myVideo");
+    
+    if (input === correctPassword) {
+      error.innerText = "";
+      videoContainer.style.display = "block";
+      video.src = videoSrc;
+      video.load();
+    } else {
+      error.innerText = "ভুল পাসওয়ার্ড!";
+      videoContainer.style.display = "none";
+      video.src = "";
     }
-  </script>
-
-</body>
-</html>
+  }
+</script>
