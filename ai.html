@@ -216,12 +216,36 @@
       sendSound.play();
     }
 
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) {
+        console.log("Speech Synthesis not supported");
+        return;
+      }
+      
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = language === "bn" ? "bn-BD" : "en-US";
+
+      utterance.onstart = () => console.log("Speech started");
+      utterance.onerror = (e) => console.error("Speech error:", e.error);
+      utterance.onend = () => console.log("Speech ended");
+
+      let voices = speechSynthesis.getVoices();
+      if (voices.length === 0) {
+        speechSynthesis.onvoiceschanged = () => {
+          voices = speechSynthesis.getVoices();
+          speechSynthesis.speak(utterance);
+        };
+      } else {
+        speechSynthesis.speak(utterance);
+      }
+    }
+
     async function sendMessage() {
       const message = userInput.value.trim();
       if (!message) return;
 
       const blockedWords = ['google'];
-      if (blockedWords.some(word => message.includes(word))) {
+      if (blockedWords.some(word => message.toLowerCase().includes(word))) {
         appendMessage("Abdul Mojid Ai", "Sorry, I cannot respond about 'Gemini'. Please ask something else.", "bot");
         return;
       }
@@ -292,6 +316,10 @@
 
       chatBox.appendChild(msg);
 
+      if (type === "bot") {
+        speakText(text);
+      }
+
       msg.addEventListener("mousedown", (e) => {
         let timer;
         if (e.button === 0) {
@@ -331,7 +359,7 @@
     });
 
     function moreOptions() {
-      window.location.href = 'details.html';
+      alert("More options coming soon!");
     }
   </script>
 </body>
